@@ -101,8 +101,8 @@ define test-integration-for-version
 		lib/spark-$1-bin-$2/bin/spark-submit \
 			--master local[*] \
 			--driver-memory 512m \
-			--jars target/scala-2.10/pyspark-elastic-assembly-$(VERSION).jar \
-			--py-files target/scala-2.10/pyspark-elastic-assembly-$(VERSION).jar \
+			--jars target/scala-2.11/pyspark-elastic-assembly-$(VERSION).jar \
+			--py-files target/scala-2.11/pyspark-elastic-assembly-$(VERSION).jar \
 			python/pyspark_elastic/tests.py
 			
 	echo ======================================================================
@@ -114,7 +114,7 @@ dist: clean-pyc
 	sbt assembly
 	cd python ; \
 		find . -mindepth 2 -name '*.py' -print | \
-		zip ../target/scala-2.10/pyspark-elastic-assembly-$(VERSION).jar -@
+		zip ../target/scala-2.11/pyspark-elastic-assembly-$(VERSION).jar -@
 
 
 all: clean dist
@@ -127,11 +127,11 @@ publish: clean
 	# push the python source files into the jar
 	cd python ; \
 		find . -mindepth 2 -name '*.py' -print | \
-		zip ../target/scala-2.10/pyspark-elastic_2.10-$(VERSION).jar -@
+		zip ../target/scala-2.11/pyspark-elastic_2.11-$(VERSION).jar -@
 
 	# copy it to the right name, and update the jar in the zip
-	cp target/scala-2.10/pyspark-elastic{_2.10,}-$(VERSION).jar
-	cd target/scala-2.10 ;\
+	cp target/scala-2.11/pyspark-elastic{_2.11,}-$(VERSION).jar
+	cd target/scala-2.11 ;\
 		zip ../pyspark-elastic-$(VERSION).zip pyspark-elastic-$(VERSION).jar
 
 	# send the package to spark-packages
