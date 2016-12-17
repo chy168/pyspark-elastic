@@ -11,12 +11,14 @@ credentials += Credentials(Path.userHome / ".ivy2" / ".sbtcredentials")
 licenses += "Apache-2.0" -> url("http://opensource.org/licenses/Apache-2.0") 
 
 libraryDependencies ++= Seq(
-	"org.elasticsearch" %% "elasticsearch-spark" % "2.2.0-beta1"
+	("org.elasticsearch" %% "elasticsearch-spark-20" % "5.0.2").
+        exclude("org.glassfish.hk2.external", "javax.inject")
+        exclude("org.glassfish.hk2.external", "aopalliance-repackaged")
 )
 
 spName := "TargetHolding/pyspark-elastic"
 
-sparkVersion := "1.5.1"
+sparkVersion := "2.0.2"
 
 sparkComponents += "streaming"
 
